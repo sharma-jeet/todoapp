@@ -10,15 +10,18 @@
 ## Phase 2: V1 - Core Todo CRUD Operations
 
 ### Database & Models
-- [ ] Design Todo data model (id, title, done fields)
-- [ ] Set up in-memory data store (start simple)
-- [ ] Implement UUID generation for todo IDs
+- [x] Design Todo data model (id, title, done fields)
+- [x] Set up in-memory data store (ConcurrentHashMap)
+- [x] Implement UUID generation for todo IDs
 
 ### POST /todos endpoint
-- [ ] Create route handler for POST /todos
+- [x] Create route handler for POST /todos
+- [x] Create TodoRepository with save method
+- [x] Create TodoService with createTodo method
+- [x] Create TodoController with POST endpoint
+- [x] Set default value for done field (false)
+- [x] Return 201 with created todo object
 - [ ] Implement request validation (title required)
-- [ ] Set default value for done field (false)
-- [ ] Return 201 with created todo object
 - [ ] Add error handling for invalid requests
 
 ### PATCH /todos/{id} endpoint
