@@ -1,0 +1,461 @@
+{
+	"info": {
+		"_postman_id": "todo-app-collection",
+		"name": "Todo App API",
+		"description": "Complete API collection for Todo App built with Spring Boot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health & Status",
+			"item": [
+				{
+					"name": "Root - Hello World",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								""
+							]
+						},
+						"description": "Returns hello world message and status"
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"health"
+							]
+						},
+						"description": "Returns health status of the application"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Todos - V1",
+			"item": [
+				{
+					"name": "Create Todo (title only)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Buy milk\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"todos"
+							]
+						},
+						"description": "Creates a new todo with default done=false"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Todo (with done=true)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Already completed task\",\n    \"done\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"todos"
+							]
+						},
+						"description": "Creates a new todo with explicit done=true"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Todo",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Buy milk\",\n    \"done\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/todos/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"todos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "your-todo-id-here",
+									"description": "UUID of the todo to update"
+								}
+							]
+						},
+						"description": "Updates an existing todo (partial update supported)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"todos"
+							]
+						},
+						"description": "Returns all todos with items array and total count"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Todos with Query Filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/todos?query=milk",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"todos"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "milk",
+									"description": "Substring filter for todo titles"
+								}
+							]
+						},
+						"description": "Returns todos filtered by title substring"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Todos - V2 Extensions",
+			"item": [
+				{
+					"name": "Get Todos with Pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/todos?page=1&per_page=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"todos"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number (default: 1)"
+								},
+								{
+									"key": "per_page",
+									"value": "10",
+									"description": "Items per page (default: 10)"
+								}
+							]
+						},
+						"description": "Returns paginated todos"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Todos with Pagination & Query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/todos?page=2&per_page=5&query=buy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"todos"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "per_page",
+									"value": "5"
+								},
+								{
+									"key": "query",
+									"value": "buy"
+								}
+							]
+						},
+						"description": "Returns paginated and filtered todos"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/metrics",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"metrics"
+							]
+						},
+						"description": "Returns request metrics (total_requests, total_4xx, total_5xx)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Todo with Idempotency Key",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Idempotency-Key",
+								"value": "abc123",
+								"description": "Unique idempotency key"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Unique task\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"todos"
+							]
+						},
+						"description": "Creates a todo with idempotency key - duplicate requests return same todo"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Todo with Idempotency Key (Duplicate)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Idempotency-Key",
+								"value": "abc123",
+								"description": "Same idempotency key as previous request"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Different title but same key\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"todos"
+							]
+						},
+						"description": "Should return 200 with the same todo created by first request (not 201)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Error Cases",
+			"item": [
+				{
+					"name": "Create Todo - Missing Title",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"todos"
+							]
+						},
+						"description": "Should return 400 with meaningful error message"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Todo - Empty Title",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"todos"
+							]
+						},
+						"description": "Should return 400 with meaningful error message"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Todo - Not Found",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"done\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/todos/non-existent-id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"todos",
+								"non-existent-id"
+							]
+						},
+						"description": "Should return 404 with meaningful error message"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}
