@@ -26,4 +26,16 @@ public class GlobalExceptionHandler {
         errorResponse.put("error", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
+
+    /**
+     * Handles todo not found exceptions.
+     * @param ex the exception
+     * @return 404 Not Found with error message
+     */
+    @ExceptionHandler(TodoNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleTodoNotFoundException(TodoNotFoundException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
 }

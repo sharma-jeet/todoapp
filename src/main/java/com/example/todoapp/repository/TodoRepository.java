@@ -4,6 +4,7 @@ import com.example.todoapp.model.Todo;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -22,5 +23,14 @@ public class TodoRepository {
     public Todo save(Todo todo) {
         todos.put(todo.getId(), todo);
         return todo;
+    }
+
+    /**
+     * Finds a todo by its ID.
+     * @param id the todo ID
+     * @return Optional containing the todo if found, empty otherwise
+     */
+    public Optional<Todo> findById(String id) {
+        return Optional.ofNullable(todos.get(id));
     }
 }

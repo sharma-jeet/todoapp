@@ -21,15 +21,19 @@
 - [x] Create TodoController with POST endpoint
 - [x] Set default value for done field (false)
 - [x] Return 201 with created todo object
-- [ ] Implement request validation (title required)
-- [ ] Add error handling for invalid requests
+- [x] Implement request validation (title required, not empty)
+- [x] Add error handling with InvalidTodoException
+- [x] Create GlobalExceptionHandler for meaningful error responses
 
 ### PATCH /todos/{id} endpoint
-- [ ] Create route handler for PATCH /todos/{id}
-- [ ] Implement todo lookup by ID
-- [ ] Support partial updates (title and/or done)
-- [ ] Return 200 with updated todo
-- [ ] Handle 404 for non-existent todos
+- [x] Create route handler for PATCH /todos/{id}
+- [x] Add findById method to TodoRepository
+- [x] Create TodoNotFoundException exception
+- [x] Implement todo lookup by ID in TodoService
+- [x] Support partial updates (title and/or done)
+- [x] Return 200 with updated todo
+- [x] Handle 404 for non-existent todos
+- [x] Update GlobalExceptionHandler for 404 responses
 
 ### GET /todos endpoint
 - [ ] Create route handler for GET /todos
